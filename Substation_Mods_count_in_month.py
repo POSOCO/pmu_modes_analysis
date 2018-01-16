@@ -57,13 +57,13 @@ fig_size[0] = 5*num_subplt_rows
 fig_size[1] = 6*num_subplt_cols
 plt.rcParams["figure.figsize"] = fig_size
 # Set Title of figure
-plt.gcf().suptitle('Mode frequencies found in a time period for different Substations in a month')
+plt.gcf().suptitle('Mode frequencies found in a time period for different Substations in a month', fontsize=20)
 
 for ss_counter, ss_name in enumerate(ss_names):
     # set the subplot title
     ax = ax_array[ss_counter]
-    ax.plot(pd.to_datetime(plottingDf['STARTDATE']), plottingDf['Frequency:PDX1'], marker=".",  markersize=2, linewidth=0,c='r')
-    ax.set_title("{}".format(ss_name), fontsize = 10)
+    ax.plot(pd.to_datetime(plottingDf[plottingDf['SubstationId']==ss_name]['STARTDATE']), plottingDf[plottingDf['SubstationId']==ss_name]['Frequency:PDX1'], marker=".",  markersize=2, linewidth=0,c='r')
+    ax.set_title("{}".format(ss_name), fontsize = 14)
     for label in ax.get_xticklabels() + ax.get_yticklabels():
         label.set_visible(True)
     # set the major and minor tick locations and formats
@@ -75,6 +75,6 @@ plt.tight_layout(w_pad = 0.2, pad = 0.35)
 # axes up to make room for them
 fig.autofmt_xdate()
 # explicitly set the top margin to accommodate the title
-fig.subplots_adjust(top=0.95)
+fig.subplots_adjust(top=0.85)
 fig.savefig('temp.png')
 
